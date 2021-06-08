@@ -1,0 +1,21 @@
+extends layout
+block content
+    h1 Dodaj Zwierze
+    form(method='POST' action='/add')
+        table
+            tr
+                td
+                    label Rasa
+                td
+                    input#name(type='text' name='Rasa')
+            tr
+                td
+                    label Znaki Szczególne
+                td
+                    input#name(type='text' name='ZnakiSzczegolne')
+            tr
+                td
+                    button(type='submit') Dodaj
+                td
+    if message!=''
+        p #{message}

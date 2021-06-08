@@ -1,0 +1,10 @@
+extends layout
+block content
+    h1 Usuń Zwierze
+    form(method='POST' action='/delete')
+        select#DeleteAnimal
+            each variable in animalList
+                option(name=variable.id_zwierza) #{variable.id_zwierza + ", Rasa: " + variable.Rasa + ", Znaki Szczególne: " + variable.ZnakiSzczegolne}
+        button(type='submit') Usuń
+    if message!=''
+        p #{message}

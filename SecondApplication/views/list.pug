@@ -1,0 +1,15 @@
+extends layout 
+block content 
+    h1 Lista Zwierząt
+    table
+        thead
+            tr
+                th Lp.
+                th Rasa
+                th Znaki Szczególne
+        tbody
+            each animal, index in animalList
+                tr
+                    td=index+1
+                    td=animal.Rasa
+                    td=animal.ZnakiSzczegolne
