@@ -1,0 +1,25 @@
+extends layout
+block content
+    h1 Modyfikuj Zwierze
+    form(method='POST' action='/action')
+        each variable in animalList
+            table
+                tr
+                    td
+                        input#name(type='text' name='id_zwierza' value=variable.id_zwierza style="display:none")
+                tr
+                    td
+                        label Rasa
+                    td
+                        input#name(type='text' name='Rasa' value=variable.Rasa)
+                tr
+                    td
+                        label Znaki Szczególne
+                    td
+                        input#name(type='text' name='ZnakiSzczegolne' value=variable.ZnakiSzczegolne)
+                tr
+                    td
+                        button(type='submit') Modyfikuj
+                    td
+    if message!=''
+        p #{message}

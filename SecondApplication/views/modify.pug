@@ -1,10 +1,10 @@
 extends layout
 block content
-    h1 Usuń Zwierze
-    form(method='POST' action='/delete')
-        select#DeleteAnimal(name="DeleteAnimal")
+    h1 Modyfikuj dane o Zwierzęciu
+    form(method='POST' action='/details')
+        select#DeleteAnimal(name="Modify")
             each variable in animalList
                 option(value=variable.id_zwierza) #{variable.id_zwierza + ", Rasa: " + variable.Rasa + ", Znaki Szczególne: " + variable.ZnakiSzczegolne}
-        button(type='submit') Usuń
+        button(type='submit') Modyfikuj
     if message!=''
         p #{message}

@@ -9,7 +9,7 @@ app.use(express.urlencoded());
  
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
- 
+
 var dbOptions = {
     host: 'localhost',
     user: 'root',
@@ -70,24 +70,93 @@ app.get('/delete', function(req, res){
     });
 });
 
-app.post('/delete', function(req, res){
-    var animal={
-        id_zwierza:parseInt(req.body.DeleteAnimal)
-    }
 
+app.post('/delete', function(req, res){
+    let id_zwierza = req.body.DeleteAnimal;
+    var message = "";
     req.getConnection(function(error, conn){
-        conn.query('DELETE FROM zwierzeta WHERE id_zwierza='+animal,function(err, rows){
+        conn.query('DELETE FROM zwierzeta WHERE id_zwierza=' + id_zwierza,function(err, rows){
             if(err){
-                var message='Wystąpił błąd ' + err
+                message='Wystąpił błąd'
             }else{
-                var message='Usunięto zwierze'
-            }
- 
-             res.render('delete',{
-                 message:message
-             });
+                message='Usunięto zwierze'
+            }     
          });
+    });
+    req.getConnection(function(error, conn){
+        conn.query('SELECT * FROM zwierzeta',function(err, rows){
+            var animalList=rows;
+            res.render('delete',{
+                animalList: animalList,
+                message:message
+            });
+        });
     });
 });
 
-app.listen(3002);
+app.get('/modify', function(req, res){
+    req.getConnection(function(error, conn){
+        conn.query('SELECT * FROM zwierzeta',function(err, rows){
+            var animalList=rows;
+            console.log(animalList);
+             res.render('modify',{
+                animalList: animalList
+            });
+        });
+    });
+});
+
+app.post('/modify', function(req, res){
+    req.getConnection(function(error, conn){
+        
+        conn.query('SELECT * FROM zwierzeta',function(err, rows){
+            var animalList=rows;
+            
+             res.render('modify',{
+                animalList: animalList
+            });
+        });
+    });
+});
+
+app.post('/details', function(req, res){
+    var animalList;
+    let id_zwierza = req.body.Modify;
+    req.getConnection(function(error, conn){
+        conn.query('SELECT * FROM zwierzeta WHERE id_zwierza=' + id_zwierza,function(err, rows){
+            animalList=rows;
+            res.render('details',{
+                animalList: animalList,
+            });
+        });
+    });
+});
+
+app.post('/action', function(req, res){
+    var message = "";
+    var animal={
+        id_zwierza: req.body.id_zwierza,
+        Rasa: req.body.Rasa,
+        ZnakiSzczegolne: req.body.ZnakiSzczegolne,
+    }
+    req.getConnection(function(error, conn){
+        conn.query('UPDATE zwierzeta SET Rasa="' + animal.Rasa + '", ZnakiSzczegolne="' + animal.ZnakiSzczegolne + '"WHERE id_zwierza=' + animal.id_zwierza,function(err, rows){
+            if(err){
+                var message='Wystąpił błąd ' + err
+            }else{
+                var message='Zmodyfikowano zwierze'
+            }
+         });
+    });
+    req.getConnection(function(error, conn){
+        conn.query('SELECT * FROM zwierzeta',function(err, rows){
+            var animalList=rows;
+            res.render('modify',{
+                animalList: animalList,
+                message:message
+            });
+        });
+    });
+});
+
+app.listen(3001);
