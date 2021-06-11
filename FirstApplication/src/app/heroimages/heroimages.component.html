@@ -1,0 +1,26 @@
+<h2>My Heroes</h2>
+
+
+<img src="../../assets/ironman.jpg" id="img_1" alt="img#1" class="old">
+<img src="../../assets/spiderman.png" id="img_2" alt="img#2" class="old">
+<img src="../../assets/thor.jpg" id="img_3" alt="img#3" class="old">
+<img src="../../assets/Kapitan_Ameryka.png" id="img_4" alt="img#4" class="old">
+<img src="../../assets/czarnawdowa.jpg" id="img_5" alt="img#5" class="old">
+<img src="../../assets/hulk.jpg" id="img_6" alt="img#6" class="old">
+<img src="../../assets/scarletwitch.jpg" id="img_7" alt="img#7" class="old">
+<img src="../../assets/Hawkeye.png" id="img_8" alt="img#8" class="old">
+<img src="../../assets/Ant-Man.png" id="img_9" alt="img#9" class="old">
+<img src="../../assets/kapitanmarvel.jpg" id="img_10" alt="img#10" class="old">
+<img src="../../assets/falcon.png" id="img_11" alt="img#11" class="old">
+<img src="../../assets/vision.jpg" id="img_12" alt="img#12" class="old">
+<img src="../../assets/warmachine.jfif" id="img_13" alt="img#13" class="old">
+
+<ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{hero.id}}">
+      <span class="badge" >{{hero.id}}</span> {{hero.name}}
+    </a>
+    <button class="showInfo" title="Show Info" (click)="showHeroImage(hero)">Show/Hide Hero Image</button>
+  </li>
+</ul>
+
