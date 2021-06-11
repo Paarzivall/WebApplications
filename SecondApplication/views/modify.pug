@@ -2,7 +2,7 @@ extends layout
 block content
     h1 Modyfikuj dane o Zwierzęciu
     form(method='POST' action='/details')
-        select#DeleteAnimal(name="Modify")
+        select#Modify(name="Modify")
             each variable in animalList
                 option(value=variable.id_zwierza) #{variable.id_zwierza + ", Rasa: " + variable.Rasa + ", Znaki Szczególne: " + variable.ZnakiSzczegolne}
         button(type='submit') Modyfikuj
